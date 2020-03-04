@@ -41,11 +41,6 @@ namespace TamagotchiAPI.Controllers
     {
       CheckForDeadPets();
 
-      (from pet in tamagotchiDb.Pets where pet.IsDead == false select pet).ToList()
-        .ForEach(pet => pet.LastInteractedWithDate = DateTime.Now);
-
-      tamagotchiDb.SaveChanges();
-
       return new ContentResult()
       {
         Content = JsonSerializer.Serialize(tamagotchiDb.Pets),
@@ -59,11 +54,6 @@ namespace TamagotchiAPI.Controllers
     public ActionResult GetAllAlivePets()
     {
       CheckForDeadPets();
-
-      (from pet in tamagotchiDb.Pets where pet.IsDead == false select pet).ToList()
-        .ForEach(pet => pet.LastInteractedWithDate = DateTime.Now);
-
-      tamagotchiDb.SaveChanges();
 
       return new ContentResult()
       {
